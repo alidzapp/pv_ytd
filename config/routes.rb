@@ -3,6 +3,10 @@ PvYtd::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+  post 'enqueue' => 'system#enqueue'
+  get 'progress/:token' => 'system#progress'
+  get 'finished/:token' => 'system#finished'
+
   root 'system#index'
 
   # Example of regular route:

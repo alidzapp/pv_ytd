@@ -1,1 +1,6 @@
-test
+= form_tag(:action => 'enqueue',:role => 'form') do
+  %input{:type => :text, :name => 'url', :class => 'form-control input-lg',:placeholder => 'enter your video url'}
+  %button{:name => 'enqueue', :class =>'btn btn-primary'}
+    grab it!
+
+= render :file => "/shared/_latest"

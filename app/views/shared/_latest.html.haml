@@ -1,0 +1,8 @@
+%h2 10 latest video convertions
+
+%table
+  - @latest_convertions.each do |convertion|
+    %tr
+      %td
+        %a{:href => convertion.url}
+          = convertion.url

@@ -1,13 +1,19 @@
 require 'pty'
 class YT_Converter
-  attr_accessor :source_url, :audio_file
+  attr_accessor :source_url, :audio_file, :save_dir
 
   def initialize(url)
     self.source_url = url
   end
 
   def convert
-    cmd = "viddl-rb -e #{self.source_url}"
+    cmd = "viddl-rb -e"
+    if self.save_dir
+      cmd << "-s #{self.save_dir}"
+    end
+
+    cmd << " #{self.source_url}"
+
     puts cmd
 
     begin
@@ -17,8 +23,8 @@ class YT_Converter
           stdin.each do |line|
             print line
             if ( line =~ /Done extracting audio to(.*)/ )
-              self.audio_file = line.gsub("Done extracting audio to","")
-              puts "audio file: #{self.audio_file}"
+              self.audio_file = line.gsub("Done extracting audio to","").strip
+              puts "audio file: <#{self.audio_file}>"
             end
           end
         rescue Errno::EIO
